@@ -1,8 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\control.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\_Logica (Aris)\LogicaControl.cs">
     <Files>
-      <File FileName="Assets\control.js" Line="1" Column="1" />
+      <File FileName="Assets\_Logica (Aris)\LogicaControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\_Logica (Aris)\scriptCasilla.cs" Line="10" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
