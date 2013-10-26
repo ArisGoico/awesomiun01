@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\_Logica (Aris)\LogicaControl.cs" />
+     <Compile Include="Assets\_Logica (Aris)\VariablesCustom.cs" />
      <Compile Include="Assets\_Logica (Aris)\scriptCasilla.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
