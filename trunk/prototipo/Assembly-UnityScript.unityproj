@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\_test01\scripts\control.js" />
+     <Compile Include="Assets\scenes\Main Menu\Scripts\ShowMenu.js" />
+     <Compile Include="Assets\scenes\Main Menu\Scripts\fade.js" />
+     <Compile Include="Assets\scenes\SplashScene\SplashToMenu.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
