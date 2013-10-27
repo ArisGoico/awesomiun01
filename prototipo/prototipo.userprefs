@@ -1,10 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\_Logica (Aris)\LogicaControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scenes\Main Menu\Scripts\ShowMenu.js">
     <Files>
-      <File FileName="Assets\_Logica (Aris)\LogicaControl.cs" Line="52" Column="1" />
-      <File FileName="Assets\_Logica (Aris)\scriptCasilla.cs" Line="9" Column="26" />
-      <File FileName="Assets\_Logica (Aris)\VariablesCustom.cs" Line="9" Column="30" />
+      <File FileName="Assets\scenes\Main Menu\Scripts\ShowMenu.js" Line="58" Column="6" />
+      <File FileName="Assets\scenes\Main Menu\Scripts\fade.js" Line="20" Column="48" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
