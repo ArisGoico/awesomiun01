@@ -7,10 +7,10 @@ public static class Utilidades
 	{
 		RaycastHit hit;
 		GameObject obj = null;
-		int layerMask = 1 << 8;
+		int layerMask = (1 << LayerMask.NameToLayer("Casillas"));
 		if(Physics.Raycast(new Vector3(x,1,z), Vector3.down, out hit, Mathf.Infinity, layerMask))
 		{
-			obj = hit.collider.transform.parent.gameObject;		
+			obj = hit.collider.gameObject;		
 		}		
 		return obj;		
 	}
