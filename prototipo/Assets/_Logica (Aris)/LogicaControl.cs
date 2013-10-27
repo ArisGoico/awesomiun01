@@ -51,7 +51,7 @@ public class LogicaControl : MonoBehaviour {
 		for (int i = 0; i < alto; i++) {
 			for (int j = 0; j < ancho; j++) {
 				GameObject casillaTemp;
-				casillaTemp = Instantiate(prefabCasilla, posInicial + Vector3.right * j + Vector3.forward * i, Quaternion.Euler(new Vector3(90, 0, 0))) as GameObject;
+				casillaTemp = Instantiate(prefabCasilla, posInicial + Vector3.right * j + Vector3.forward * i, prefabCasilla.transform.rotation) as GameObject;
 				casillaTemp.name = "Casilla_" + i + "_" + j;
 				casillaTemp.transform.parent = tablero.transform;
 				colorBool colTemp = colorAleatorio(probColor);
