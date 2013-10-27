@@ -5,6 +5,8 @@ public var alphaWait : boolean = true;
 
 private var alpha = 1.0;
 private var fadeDir = -1;
+private var cargar:boolean = false;
+private var cargarEscena:String = "";
 
 function Start () {
 	alpha=1;
@@ -23,6 +25,9 @@ function OnGUI(){
 	
 	GUI.color.a = alpha;
 	GUI.DrawTexture(Rect(0, 0, Screen.width, Screen.height), fadeOutTexture);
+	if (cargar && !cargarEscena.Equals("")) {
+		Application.LoadLevel(cargarEscena);
+	}
 }
 
 function fadeIn(){
@@ -33,4 +38,10 @@ function fadeIn(){
   
 function fadeOut(){
     fadeDir = 1; 
+}
+
+function fadeAndLoad(escena:String) {
+	fadeOut();
+	cargarEscena = escena;
+	cargar = true;
 }

@@ -9,6 +9,7 @@ var textoQuit:GameObject;
 var cursorMenu:GameObject;
 var volBar:GameObject;
 var volBarBg:GameObject;
+var camara:GameObject;
 
 enum Dificultad {Bajo, Medio, Alto};
 
@@ -57,7 +58,8 @@ function OnGUI () {
 				case 0:
 					//cargar escena juego
 					//TODO: pasar en PlayerPrefs Dificultad.dif y sliderVol (volumen)
-					Application.LoadLevel("juego_01");
+					audio.PlayOneShot(startSnd);
+					camara.GetComponent(fade).fadeAndLoad("juego_01");
 					break;
 				case 1:
 					//SliderVolumen
