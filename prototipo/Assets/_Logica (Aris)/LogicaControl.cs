@@ -10,11 +10,13 @@ public class LogicaControl : MonoBehaviour {
 	
 	public float tiempoInicio	= 5.0f;				//Tiempo en segundo spara que empiece a contar las condiciones de victoria y derrota
 	
-	//Variables publicas de referencia
+	//Variables publicas de referencia---------------------------------------------------------------------------------------------------------------
+	//Prefabs
 	public GameObject prefabCasilla;
 	public GameObject prefabJugador;
 	public GameObject prefabGota;
 	
+	//Colores (Materiales)
 	public Material colorBase;
 	public Material color1;
 	public Material color2;
@@ -24,7 +26,22 @@ public class LogicaControl : MonoBehaviour {
 	public Material color6;
 	public Material colorNegro;
 	
-	//Variables privadas
+	//Sonidos
+	public AudioClip hatSample;
+	public AudioClip hatComboSample;
+	public AudioClip musicaSample;
+	public AudioClip nota1Sample;
+	public AudioClip nota2Sample;
+	public AudioClip nota3Sample;
+	public AudioClip nota4Sample;
+	public AudioClip nota5Sample;
+	public AudioClip nota6Sample;
+	
+	public AudioSource musicaPlayer;
+	public AudioSource ritmoPlayer;
+	public AudioSource sfxPlayer;
+	
+	//Variables privadas-----------------------------------------------------------------------------------------------------------------------------
 	private Vector3 posInicial	= Vector3.zero;
 	private controlCasilla color1Cont;
 	private controlCasilla color2Cont;
@@ -38,11 +55,14 @@ public class LogicaControl : MonoBehaviour {
 	private int totalColores 	= 0;
 	private int totalNoBase 	= 0;
 	
+	private float tiempoMusica	= 0.6f;
+	
 	
 	//-----------------------------------------------------------------Funciones behavioural del script----------------------------------------------------------------------------
 	
 	void Start () {
 		initControl();
+		initAudio();
 		Screen.showCursor = false;
 		
 		//Generacion del tablero
@@ -77,6 +97,20 @@ public class LogicaControl : MonoBehaviour {
 				Debug.Log("Se ha cumplido la condicion de victoria!!");
 			}
 		}
+		
+		/*
+		Control del tiempo y el sonido
+		Cada "tiempoMusica", lanzar un hat o hatCombo si procede, pero no de uno en uno sino con autoplay.
+		Si se quiere bajar de hatCombo a hat solamente, se desactiva el autoplay y cuando este en .isPlaying a false, se pone el otro.
+		*/
+		
+		/*
+		Las gotas caen en casillas de color base en principio (se puede hacer que esto varie con la dificultad).
+		Cuando una gota cae, eliminar la casilla del array de control y moverla al que corresponda.
+		
+		Las gotas tambien se lanzan en intervalos de tiempo controlados, para que el sonido salga sincronizado con la musica. Al menos, dentro de unos limites razonables.
+		Para ello, la animacion de la gota cayendo debe durar la mitad de "tiempoMusica" y el sonido sonar cuando toque el tablero.
+		*/
 	}
 	
 	void OnGUI() {
@@ -97,6 +131,12 @@ public class LogicaControl : MonoBehaviour {
 		color6Cont = new controlCasilla(ancho*alto);
 		colorBaseCont = new controlCasilla(ancho*alto);
 		colorNegroCont = new controlCasilla(ancho*alto);
+	}
+	
+	private void initAudio() {
+//		musicaPlayer.volume = PlayerPrefs.GetFloat("vol") * 0.2f;
+//		sfxPlayer.volume = PlayerPrefs.GetFloat("vol") * 0.4f;
+		musicaPlayer.Play();
 	}
 	
 	private colorBool colorAleatorio(float prob) {
