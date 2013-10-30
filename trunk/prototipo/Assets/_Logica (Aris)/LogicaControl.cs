@@ -52,10 +52,16 @@ public class LogicaControl : MonoBehaviour {
 	private controlCasilla colorBaseCont;
 	private controlCasilla colorNegroCont;
 	
-	private int totalColores 	= 0;
-	private int totalNoBase 	= 0;
+	private int totalColores 		= 0;
+	private int totalNoBase 		= 0;
 	
-	private float tiempoMusica	= 0.6f;
+	private int dificultad			= 0;
+	
+	private float tiempoRitmo		= 0.6f;
+	private float ritmoSimpleCap	= 0.2f;
+	private float ritmoComboCap		= 0.6f;
+	private bool iniciaRitmo		= false;
+	private bool ritmoComboPlaying	= false;
 	
 	
 	//-----------------------------------------------------------------Funciones behavioural del script----------------------------------------------------------------------------
@@ -98,19 +104,45 @@ public class LogicaControl : MonoBehaviour {
 			}
 		}
 		
-		/*
-		Control del tiempo y el sonido
-		Cada "tiempoMusica", lanzar un hat o hatCombo si procede, pero no de uno en uno sino con autoplay.
-		Si se quiere bajar de hatCombo a hat solamente, se desactiva el autoplay y cuando este en .isPlaying a false, se pone el otro.
-		*/
+		
+		//Control del tiempo y el sonido. Inicializa "iniciaRitmo" en intervalos adecuados
+		controlRitmo();
+				
 		
 		/*
 		Las gotas caen en casillas de color base en principio (se puede hacer que esto varie con la dificultad).
 		Cuando una gota cae, eliminar la casilla del array de control y moverla al que corresponda.
 		
 		Las gotas tambien se lanzan en intervalos de tiempo controlados, para que el sonido salga sincronizado con la musica. Al menos, dentro de unos limites razonables.
-		Para ello, la animacion de la gota cayendo debe durar la mitad de "tiempoMusica" y el sonido sonar cuando toque el tablero.
+		Para ello, la animacion de la gota cayendo debe durar la mitad de "tiempoRitmo" y el sonido sonar cuando toque el tablero.
 		*/
+//		controlGotas();
+		
+		if (iniciaRitmo) {
+			float probGotas = 0.0f;
+			switch (dificultad) {
+				case 0:
+					probGotas = 0.1f;
+					break;
+				case 1:
+					probGotas = 0.2f;
+					break;
+				case 2: 
+					probGotas = 0.3f;
+					break;
+				default:
+					Debug.LogError("La dificultad seleccionada es erronea. Dificultad: " + dificultad + ".");
+					break;
+			}
+			if (Random.Range(0.0f, 1.0f) < probGotas) {
+				int numCas = Random.Range(0, colorBaseCont.numero - 1);
+				GameObject casillaTemp = colorBaseCont.array[numCas];
+				Instantiate(prefabGota, casillaTemp.transform.position, casillaTemp.transform.rotation);
+				colorBaseCont.quitar(numCas);
+			}
+		}
+
+		
 	}
 	
 	void OnGUI() {
@@ -131,12 +163,58 @@ public class LogicaControl : MonoBehaviour {
 		color6Cont = new controlCasilla(ancho*alto);
 		colorBaseCont = new controlCasilla(ancho*alto);
 		colorNegroCont = new controlCasilla(ancho*alto);
+//		dificultad = PlayerPrefs.GetInt("dif");
 	}
 	
 	private void initAudio() {
 //		musicaPlayer.volume = PlayerPrefs.GetFloat("vol") * 0.2f;
 //		sfxPlayer.volume = PlayerPrefs.GetFloat("vol") * 0.4f;
 		musicaPlayer.Play();
+		tiempoRitmo = hatSample.length;
+	}
+	
+	private void controlRitmo() {
+		/*
+		Control del tiempo y el sonido
+		Cada "tiempoRitmo", lanzar un hat o hatCombo si procede, pero no de uno en uno sino con autoplay.
+		Si se quiere bajar de hatCombo a hat solamente, se desactiva el autoplay y cuando este en .isPlaying a false, se pone el otro.
+		*/
+		float tempMod = Time.time % tiempoRitmo;
+		iniciaRitmo = tempMod < 0.05f || tempMod > (tiempoRitmo - 0.05f);
+//		iniciaRitmo = (!ritmoPlayer.isPlaying || (ritmoPlayer.isPlaying && ((ritmoPlayer.clip.length - ritmoPlayer.time) < 0.05f || (ritmoPlayer.time) < 0.05f)));
+		float condDerrotaF = condicionDerrotaFloat();
+		Debug.Log("CondDerrotaF: " + condDerrotaF);
+		
+		//Subir de sin ritmo a ritmo simple
+		if (condDerrotaF > ritmoSimpleCap && !ritmoPlayer.isPlaying && iniciaRitmo && !ritmoComboPlaying) {
+			ritmoPlayer.loop = true;
+			ritmoPlayer.clip = hatSample;
+			ritmoPlayer.Play();
+			ritmoComboPlaying = false;
+		}
+		
+		//Subir de ritmo simple a rimto rapido
+		if (condDerrotaF > ritmoComboCap && ritmoPlayer.isPlaying && iniciaRitmo && !ritmoComboPlaying) {
+			ritmoPlayer.clip = hatComboSample;
+			ritmoPlayer.Play();
+			ritmoComboPlaying = true;
+		}
+		
+		//Bajar de ritmo rapido a ritmo simple
+		if (ritmoComboPlaying && condDerrotaF < ritmoComboCap && iniciaRitmo) {
+			ritmoPlayer.loop = false;
+			ritmoComboPlaying = false;
+		}
+		
+		//Quitar ritmo
+		if (ritmoPlayer.isPlaying && condDerrotaF < ritmoSimpleCap && iniciaRitmo) {
+			ritmoPlayer.Stop();
+			ritmoComboPlaying = false;
+		}
+	}
+	
+	private void controlGotas() {
+		
 	}
 	
 	private colorBool colorAleatorio(float prob) {
@@ -225,6 +303,16 @@ public class LogicaControl : MonoBehaviour {
 		*/
 		
 		return false;
+	}
+	
+	private float condicionDerrotaFloat() {
+		
+		//Condicion: mas de color que base --> if (totalColores > colorBaseCont.numero)
+		return Mathf.InverseLerp(0.0f, (float)colorBaseCont.numero, totalColores);
+		/* Espacio para otras posibles condiciones */
+		
+		
+//		return 0.0f;
 	}
 	
 	private bool condicionVictoria() {

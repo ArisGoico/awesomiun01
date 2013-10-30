@@ -49,6 +49,7 @@
      <Compile Include="Assets\_Logica (Aris)\LogicaControl.cs" />
      <Compile Include="Assets\_Logica (Aris)\VariablesCustom.cs" />
      <Compile Include="Assets\_Logica (Aris)\scriptCasilla.cs" />
+     <Compile Include="Assets\_Logica (Aris)\scriptGota.cs" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\NFAA.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\VignetteShader.shader" />

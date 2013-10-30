@@ -1,10 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\_Logica (Aris)\LogicaControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\_Logica (Aris)\scriptGota.cs">
     <Files>
-      <File FileName="Assets\_Logica (Aris)\LogicaControl.cs" Line="85" Column="1" />
+      <File FileName="Assets\_Logica (Aris)\LogicaControl.cs" Line="126" Column="12" />
       <File FileName="Assets\_Controlador (Marcos)\Utilidades.cs" Line="23" Column="1" />
       <File FileName="Assets\_Controlador (Marcos)\ControladorJugador.cs" Line="20" Column="10" />
+      <File FileName="Assets\_Logica (Aris)\VariablesCustom.cs" Line="23" Column="1" />
+      <File FileName="Assets\_Logica (Aris)\scriptGota.cs" Line="14" Column="54" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
