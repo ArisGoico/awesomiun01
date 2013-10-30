@@ -36,6 +36,10 @@ function Start () {
 	cursorMenu.renderer.enabled=false;
 	textoVisible();
 	cursorVisible();
+	sliderVol = PlayerPrefs.GetFloat("vol");
+	volBar.guiTexture.pixelInset.width=sliderVol*195;
+	dif = PlayerPrefs.GetInt("dif");
+	textoDif2.guiText.text = "\t" + dif.ToString();
 }
 
 function OnGUI () {
@@ -57,7 +61,9 @@ function OnGUI () {
 			switch (opcionSeleccionada) {
 				case 0:
 					//cargar escena juego
-					//TODO: pasar en PlayerPrefs Dificultad.dif y sliderVol (volumen)
+					//dif se guarda en cada cambio;
+					PlayerPrefs.SetFloat("vol", sliderVol);
+					PlayerPrefs.Save();
 					audio.PlayOneShot(startSnd);
 					camara.GetComponent(fade).fadeAndLoad("juego_01");
 					break;
@@ -106,6 +112,7 @@ function OnGUI () {
 			if (dif >2) dif = Dificultad.Bajo;
 			if (dif <0) dif = Dificultad.Alto;
 			textoDif2.guiText.text = "\t" + dif.ToString();
+			PlayerPrefs.SetInt("dif", dif);
 			esperaHorizontal(0.3f);
 		}
 					
