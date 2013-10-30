@@ -4,10 +4,17 @@ using System.Collections;
 public class scriptGota : MonoBehaviour {
 
 	public colorBool colorGota;
+	public GameObject casilla;
+	public controlCasilla control;
+	public int numCasilla;
+	public LogicaControl scriptPadre;
 	
 	
 	public void tocarCasilla() {
-		Debug.Log("Tocada la casilla y teñida de " + colorGota + ".");	
+		if (scriptPadre == null)
+			scriptPadre = GameObject.FindGameObjectWithTag("script").GetComponent<LogicaControl>();
+		scriptPadre.cambiaColor(colorGota, casilla, control, numCasilla);
+//		Debug.Log("Tocada la casilla y teñida de " + colorGota + ".");	
 	}
 	
 	public void morir() {

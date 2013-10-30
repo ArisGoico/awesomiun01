@@ -53,7 +53,7 @@ public class LogicaControl : MonoBehaviour {
 	private controlCasilla colorNegroCont;
 	
 	private int totalColores 		= 0;
-	private int totalNoBase 		= 0;
+//	private int totalNoBase 		= 0;
 	
 	private int dificultad			= 0;
 	
@@ -93,7 +93,7 @@ public class LogicaControl : MonoBehaviour {
 	
 	void Update () {
 		totalColores = color1Cont.numero + color2Cont.numero + color3Cont.numero + color4Cont.numero + color5Cont.numero + color6Cont.numero;
-		totalNoBase = ancho * alto - colorBaseCont.numero;
+//		totalNoBase = ancho * alto - colorBaseCont.numero;
 		
 		if (Time.time >= tiempoInicio) {
 			if (condicionDerrota()) {
@@ -103,45 +103,12 @@ public class LogicaControl : MonoBehaviour {
 				Debug.Log("Se ha cumplido la condicion de victoria!!");
 			}
 		}
-		
-		
+				
 		//Control del tiempo y el sonido. Inicializa "iniciaRitmo" en intervalos adecuados
 		controlRitmo();
 				
-		
-		/*
-		Las gotas caen en casillas de color base en principio (se puede hacer que esto varie con la dificultad).
-		Cuando una gota cae, eliminar la casilla del array de control y moverla al que corresponda.
-		
-		Las gotas tambien se lanzan en intervalos de tiempo controlados, para que el sonido salga sincronizado con la musica. Al menos, dentro de unos limites razonables.
-		Para ello, la animacion de la gota cayendo debe durar la mitad de "tiempoRitmo" y el sonido sonar cuando toque el tablero.
-		*/
-//		controlGotas();
-		
-		if (iniciaRitmo) {
-			float probGotas = 0.0f;
-			switch (dificultad) {
-				case 0:
-					probGotas = 0.1f;
-					break;
-				case 1:
-					probGotas = 0.2f;
-					break;
-				case 2: 
-					probGotas = 0.3f;
-					break;
-				default:
-					Debug.LogError("La dificultad seleccionada es erronea. Dificultad: " + dificultad + ".");
-					break;
-			}
-			if (Random.Range(0.0f, 1.0f) < probGotas) {
-				int numCas = Random.Range(0, colorBaseCont.numero - 1);
-				GameObject casillaTemp = colorBaseCont.array[numCas];
-				Instantiate(prefabGota, casillaTemp.transform.position, casillaTemp.transform.rotation);
-				colorBaseCont.quitar(numCas);
-			}
-		}
-
+		//Control de lanzamiento de gotas
+		controlGotas();
 		
 	}
 	
@@ -183,7 +150,7 @@ public class LogicaControl : MonoBehaviour {
 		iniciaRitmo = tempMod < 0.05f || tempMod > (tiempoRitmo - 0.05f);
 //		iniciaRitmo = (!ritmoPlayer.isPlaying || (ritmoPlayer.isPlaying && ((ritmoPlayer.clip.length - ritmoPlayer.time) < 0.05f || (ritmoPlayer.time) < 0.05f)));
 		float condDerrotaF = condicionDerrotaFloat();
-		Debug.Log("CondDerrotaF: " + condDerrotaF);
+//		Debug.Log("CondDerrotaF: " + condDerrotaF);
 		
 		//Subir de sin ritmo a ritmo simple
 		if (condDerrotaF > ritmoSimpleCap && !ritmoPlayer.isPlaying && iniciaRitmo && !ritmoComboPlaying) {
@@ -214,7 +181,53 @@ public class LogicaControl : MonoBehaviour {
 	}
 	
 	private void controlGotas() {
-		
+	/*
+	Las gotas caen en casillas de color base en principio (se puede hacer que esto varie con la dificultad).
+	Cuando una gota cae, eliminar la casilla del array de control y moverla al que corresponda.
+	
+	Las gotas tambien se lanzan en intervalos de tiempo controlados, para que el sonido salga sincronizado con la musica. Al menos, dentro de unos limites razonables.
+	Para ello, la animacion de la gota cayendo debe durar la mitad de "tiempoRitmo" y el sonido sonar cuando toque el tablero.
+	*/
+		if (iniciaRitmo) {
+			float probGotas = 0.0f;
+			switch (dificultad) {
+				case 0:
+					probGotas = 0.05f;
+					break;
+				case 1:
+					probGotas = 0.1f;
+					break;
+				case 2: 
+					probGotas = 0.15f;
+					break;
+				default:
+					Debug.LogError("La dificultad seleccionada es erronea. Dificultad: " + dificultad + ".");
+					break;
+			}
+			if (Random.Range(0.0f, 1.0f) < probGotas) {
+				int numCas = Random.Range(0, colorBaseCont.numero - 1);
+				GameObject casillaTemp = colorBaseCont.array[numCas];
+				GameObject gotaTemp;
+				gotaTemp = Instantiate(prefabGota, casillaTemp.transform.position, casillaTemp.transform.rotation) as GameObject;
+//				colorBaseCont.quitar(numCas);
+				scriptGota gotaScriptTemp = gotaTemp.GetComponentInChildren<scriptGota>();
+				gotaScriptTemp.colorGota = colorAleatorio();
+				gotaScriptTemp.casilla = casillaTemp;
+				gotaScriptTemp.scriptPadre = this as LogicaControl;
+				gotaScriptTemp.numCasilla = numCas;
+				gotaScriptTemp.control = colorBaseCont;
+			}
+		}
+	}
+	
+	public void cambiaColor(colorBool col, GameObject cas, controlCasilla cont, int numCas) {
+		Material matTemp = colBoolToMat(col);
+		controlCasilla controlTemp = matToControl(matTemp);
+		cont.quitar(numCas);
+		controlTemp.agregar(cas);
+		cas.renderer.material = matTemp;
+		sfxPlayer.clip = colBoolToSFX(col);
+		sfxPlayer.Play();
 	}
 	
 	private colorBool colorAleatorio(float prob) {
@@ -254,9 +267,44 @@ public class LogicaControl : MonoBehaviour {
 		return colorSalida;
 	}
 	
+	private colorBool colorAleatorio() {
+		colorBool colorSalida;
+		colorSalida.r = false;
+		colorSalida.g = false;
+		colorSalida.b = false;
+		int t = Random.Range(0, 6);
+		switch (t) {
+			case 0:
+				colorSalida.r = true;
+				break;
+			case 1:
+				colorSalida.g = true;
+				break;
+			case 2:
+				colorSalida.b = true;
+				break;
+			case 3:
+				colorSalida.r = true;
+				colorSalida.g = true;
+				break;
+			case 4:
+				colorSalida.r = true;
+				colorSalida.b = true;
+				break;
+			case 5:
+				colorSalida.g = true;
+				colorSalida.b = true;
+				break;
+			default:
+				Debug.LogError("Algo ha ocurrido durante la eleccion aleatoria de color. Valor de la tirada = " + t + ".");
+				break;
+		}
+		return colorSalida;
+	}
+	
 	private Material colBoolToMat(colorBool col) {
 		Material matSalida = colorBase;
-		if (col.r && !col.g && !col.b)		//Solo R
+		if (col.r && !col.g && !col.b)			//Solo R
 			matSalida = color1;
 		else if (!col.r && col.g && !col.b)		//Solo G
 			matSalida = color2;
@@ -270,6 +318,24 @@ public class LogicaControl : MonoBehaviour {
 			matSalida = color6;
 			
 		return matSalida;
+	}
+	
+	private AudioClip colBoolToSFX(colorBool col) {
+		AudioClip sfxSalida = nota1Sample;
+		if (col.r && !col.g && !col.b)			//Solo R
+			sfxSalida = nota1Sample;
+		else if (!col.r && col.g && !col.b)		//Solo G
+			sfxSalida = nota2Sample;
+		else if (!col.r && !col.g && col.b)		//Solo B
+			sfxSalida = nota3Sample;
+		else if (col.r && col.g && !col.b)		//Dos, R y G
+			sfxSalida = nota4Sample;
+		else if (!col.r && col.g && col.b)		//Dos, R y B
+			sfxSalida = nota5Sample;
+		else if (!col.r && col.g && col.b)		//Dos, G y B
+			sfxSalida = nota6Sample;
+			
+		return sfxSalida;
 	}
 	
 	private controlCasilla matToControl(Material mat) {
