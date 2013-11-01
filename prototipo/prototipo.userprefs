@@ -2,15 +2,18 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\_Logica (Aris)\LogicaControl.cs">
     <Files>
-      <File FileName="Assets\_Controlador (Marcos)\ControladorJugador.cs" Line="75" Column="6" />
-      <File FileName="Assets\_Logica (Aris)\LogicaControl.cs" Line="223" Column="25" />
+      <File FileName="Assets\_Logica (Aris)\LogicaControl.cs" Line="90" Column="69" />
+      <File FileName="Assets\_Controlador (Marcos)\ControladorJugador.cs" Line="64" Column="76" />
       <File FileName="Assets\_Controlador (Marcos)\Utilidades.cs" Line="11" Column="1" />
-      <File FileName="Assets\_Logica (Aris)\scriptCasilla.cs" Line="6" Column="2" />
-      <File FileName="Assets\_Logica (Aris)\VariablesCustom.cs" Line="19" Column="15" />
+      <File FileName="Assets\_Logica (Aris)\scriptCasilla.cs" Line="21" Column="3" />
+      <File FileName="Assets\_Logica (Aris)\VariablesCustom.cs" Line="44" Column="1" />
+      <File FileName="Assets\_Logica (Aris)\scriptGota.cs" Line="16" Column="30" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Desarrollo\Unity\Awesomiun\prototipo\Assets\_Logica (Aris)\LogicaControl.cs" line="241" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
