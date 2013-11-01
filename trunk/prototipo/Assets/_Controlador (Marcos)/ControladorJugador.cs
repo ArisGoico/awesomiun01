@@ -3,7 +3,9 @@ using System.Collections;
 
 public class ControladorJugador : MonoBehaviour
 {
-	private float lastPresTime = 0.0f;
+	public float delayMovimiento = 0.25f;
+	private float lastPressTime = 0.0f;
+	private bool absorbiendo = false;
 	private LogicaControl logicaControl;
 	private float x;
 	private float z;
@@ -25,52 +27,57 @@ public class ControladorJugador : MonoBehaviour
 	public void Update()
 	{		
 		if(Input.anyKey)
-			if(Time.time > lastPresTime + 0.25)
+			if(Time.time > lastPressTime + delayMovimiento)
 			{
 				x = transform.position.x;
 				z = transform.position.z;
 				casillaActual = Utilidades.dameCasilla(x,z);
 				casillaActualScript = casillaActual.GetComponent<scriptCasilla>();
 				// Movimiento
-				if(Input.GetButton("UP"))
+				if(Input.GetAxisRaw("Vertical") != 0)
 				{
-					lastPresTime = Time.time;				
-					if(Utilidades.hayCasilla(x,z+1))
-						transform.Translate(Vector3.forward,Space.World);
+					lastPressTime = Time.time;				
+					if(Utilidades.hayCasilla(x,z+Input.GetAxisRaw("Vertical")))
+					{
+						animation.PlayQueued("bajar");
+						transform.Translate(Vector3.forward*Input.GetAxisRaw("Vertical"),Space.World);
+						animation.PlayQueued("subir");
+					}
 				}
-				else if(Input.GetButton("LEFT"))
+				if(Input.GetAxisRaw("Horizontal") != 0)
 				{
-					lastPresTime = Time.time;				
-					if(Utilidades.hayCasilla(x-1,z))
-						transform.Translate(Vector3.left,Space.World);
+					lastPressTime = Time.time;				
+					if(Utilidades.hayCasilla(x+Input.GetAxisRaw("Horizontal"),z))
+					{
+						animation.PlayQueued("bajar");
+						transform.Translate(Vector3.right*Input.GetAxisRaw("Horizontal"),Space.World);
+						animation.PlayQueued("subir");
+					}
 				}
-				else if(Input.GetButton("RIGHT"))
-				{
-					lastPresTime = Time.time;				
-					if(Utilidades.hayCasilla(x+1,z))
-						transform.Translate(Vector3.right,Space.World);
-				}
-				else if(Input.GetButton("DOWN"))
-				{
-					lastPresTime = Time.time;				
-					if(Utilidades.hayCasilla(x,z-1))
-						transform.Translate(Vector3.back,Space.World);
-				}	
 				//Acciones casilla
-				else if(Input.GetButton("RED"))
-				{
+				else if(Input.GetButton("RED") && !absorbiendo)
+				{	
+					absorbiendo = true;
+					lastPressTime = Time.time;
+					animation.PlayQueued("absorber");
 					casillaActualScript.quitarRojo();
 					colorBool color = casillaActualScript.color;
 					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
 				}
-				else if(Input.GetButton("GREEN"))
+				else if(Input.GetButton("GREEN") && !absorbiendo)
 				{
+					absorbiendo = true;
+					lastPressTime = Time.time;
+					animation.PlayQueued("absorber");
 					casillaActualScript.quitarVerde();
 					colorBool color = casillaActualScript.color;
 					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
 				}
-				else if(Input.GetButton("BLUE"))
+				else if(Input.GetButton("BLUE") && !absorbiendo)
 				{
+					absorbiendo = true;
+					lastPressTime = Time.time;
+					animation.PlayQueued("absorber");
 					casillaActualScript.quitarAzul();
 					colorBool color = casillaActualScript.color;
 					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
@@ -78,18 +85,18 @@ public class ControladorJugador : MonoBehaviour
 			}
 		
 		//Zoom
-		if (Input.GetAxis("Mouse ScrollWheel") > 0)
-	    {
-	        if(Camera.main.fieldOfView > 30)
+		if ((Input.GetAxis("Mouse ScrollWheel") > 0) && (Camera.main.fieldOfView > 30))
+		{
 				Camera.main.fieldOfView -= 3;
 	    }
-	    if (Input.GetAxis("Mouse ScrollWheel") < 0)
-	    {
-	        if(Camera.main.fieldOfView < 90)
+	    if ((Input.GetAxis("Mouse ScrollWheel") < 0) && (Camera.main.fieldOfView < 90))
+		{
 				Camera.main.fieldOfView += 3;
-	    }		
+	    }	
 				
 	}
 	
-	
+	public void dejaAbsorbe() {
+		absorbiendo = false;
+	}
 }
