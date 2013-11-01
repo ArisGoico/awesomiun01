@@ -55,9 +55,10 @@ public class LogicaControl : MonoBehaviour {
 	private int totalColores 		= 0;
 //	private int totalNoBase 		= 0;
 	
-	private int dificultad			= 0;
+	private int dificultad			= 2;
 	
 	private float tiempoRitmo		= 0.6f;
+	private float tiempoUltima		= 0.0f;
 	private float ritmoSimpleCap	= 0.2f;
 	private float ritmoComboCap		= 0.6f;
 	private bool iniciaRitmo		= false;
@@ -104,14 +105,9 @@ public class LogicaControl : MonoBehaviour {
 			else if (condicionVictoria()) {
 				Debug.Log("Se ha cumplido la condicion de victoria!!");
 			}
-		}
-				
-		//Control del tiempo y el sonido. Inicializa "iniciaRitmo" en intervalos adecuados
-		controlRitmo();
-				
-		//Control de lanzamiento de gotas
-		controlGotas();
-		
+		}		
+		controlRitmo();		//Control del tiempo y el sonido. Inicializa "iniciaRitmo" en intervalos adecuados
+		controlGotas();		//Control de lanzamiento de gotas
 	}
 	
 	void OnGUI() {
@@ -132,12 +128,23 @@ public class LogicaControl : MonoBehaviour {
 		color6Cont = new controlCasilla(ancho*alto);
 		colorBaseCont = new controlCasilla(ancho*alto);
 		colorNegroCont = new controlCasilla(ancho*alto);
-//		dificultad = PlayerPrefs.GetInt("dif");
+		if (PlayerPrefs.HasKey("dif")) 
+			dificultad = PlayerPrefs.GetInt("dif");
+		else
+			dificultad = 2;
 	}
 	
 	private void initAudio() {
-//		musicaPlayer.volume = PlayerPrefs.GetFloat("vol") * 0.2f;
-//		sfxPlayer.volume = PlayerPrefs.GetFloat("vol") * 0.4f;
+		if (PlayerPrefs.HasKey("vol")) {
+			musicaPlayer.volume = PlayerPrefs.GetFloat("vol") * 0.2f;
+			ritmoPlayer.volume = PlayerPrefs.GetFloat("vol") * 0.2f;
+			sfxPlayer.volume = PlayerPrefs.GetFloat("vol") * 0.6f;
+		}
+		else {
+			musicaPlayer.volume = 0.2f;
+			ritmoPlayer.volume = 0.2f;
+			sfxPlayer.volume = 0.6f;
+		}
 		musicaPlayer.Play();
 		tiempoRitmo = hatSample.length;
 	}
@@ -149,7 +156,7 @@ public class LogicaControl : MonoBehaviour {
 		Si se quiere bajar de hatCombo a hat solamente, se desactiva el autoplay y cuando este en .isPlaying a false, se pone el otro.
 		*/
 		float tempMod = Time.time % tiempoRitmo;
-		iniciaRitmo = tempMod < 0.05f || tempMod > (tiempoRitmo - 0.05f);
+		iniciaRitmo = tempMod < 0.02f || tempMod > (tiempoRitmo - 0.02f);
 //		iniciaRitmo = (!ritmoPlayer.isPlaying || (ritmoPlayer.isPlaying && ((ritmoPlayer.clip.length - ritmoPlayer.time) < 0.05f || (ritmoPlayer.time) < 0.05f)));
 		float condDerrotaF = condicionDerrotaFloat();
 //		Debug.Log("CondDerrotaF: " + condDerrotaF);
@@ -190,17 +197,17 @@ public class LogicaControl : MonoBehaviour {
 	Las gotas tambien se lanzan en intervalos de tiempo controlados, para que el sonido salga sincronizado con la musica. Al menos, dentro de unos limites razonables.
 	Para ello, la animacion de la gota cayendo debe durar la mitad de "tiempoRitmo" y el sonido sonar cuando toque el tablero.
 	*/
-		if (iniciaRitmo) {
+		if (iniciaRitmo && (Time.time - tiempoUltima) > tiempoRitmo) {
 			float probGotas = 0.0f;
 			switch (dificultad) {
 				case 0:
-					probGotas = 0.05f;
+					probGotas = 0.03f;
 					break;
 				case 1:
-					probGotas = 0.1f;
+					probGotas = 0.08f;
 					break;
 				case 2: 
-					probGotas = 0.15f;
+					probGotas = 0.2f;
 					break;
 				default:
 					Debug.LogError("La dificultad seleccionada es erronea. Dificultad: " + dificultad + ".");
@@ -209,6 +216,7 @@ public class LogicaControl : MonoBehaviour {
 			if (Random.Range(0.0f, 1.0f) < probGotas) {
 				if (colorBaseCont.numero == 0)
 					return;
+				tiempoUltima = Time.time;
 				int numCas = Random.Range(0, colorBaseCont.numero - 1);
 				GameObject casillaTemp = colorBaseCont.array[numCas];
 				GameObject gotaTemp;
