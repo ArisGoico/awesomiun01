@@ -55,7 +55,7 @@ public class ControladorJugador : MonoBehaviour
 					}
 				}
 				//Acciones casilla
-				else if(Input.GetButton("RED") && !absorbiendo)
+				else if(Input.GetButton("Fire1") && !absorbiendo)
 				{	
 					absorbiendo = true;
 					lastPressTime = Time.time;
@@ -64,7 +64,7 @@ public class ControladorJugador : MonoBehaviour
 					colorBool color = casillaActualScript.color;
 					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
 				}
-				else if(Input.GetButton("GREEN") && !absorbiendo)
+				else if(Input.GetButton("Fire2") && !absorbiendo)
 				{
 					absorbiendo = true;
 					lastPressTime = Time.time;
@@ -73,7 +73,7 @@ public class ControladorJugador : MonoBehaviour
 					colorBool color = casillaActualScript.color;
 					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
 				}
-				else if(Input.GetButton("BLUE") && !absorbiendo)
+				else if(Input.GetButton("Fire3") && !absorbiendo)
 				{
 					absorbiendo = true;
 					lastPressTime = Time.time;
