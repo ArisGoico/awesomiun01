@@ -85,7 +85,9 @@ public class LogicaControl : MonoBehaviour {
 				casillaTemp.GetComponent<scriptCasilla>().color = colTemp;
 				Material matTemp = colBoolToMat(colTemp);
 				casillaTemp.renderer.material = matTemp;
-				(matToControl(matTemp)).agregar(casillaTemp);
+				controlCasilla controlTemp = matToControl(matTemp);
+				controlTemp.agregar(casillaTemp);
+				casillaTemp.GetComponent<scriptCasilla>().control = controlTemp;
 			}
 		}
 	}
@@ -205,6 +207,8 @@ public class LogicaControl : MonoBehaviour {
 					break;
 			}
 			if (Random.Range(0.0f, 1.0f) < probGotas) {
+				if (colorBaseCont.numero == 0)
+					return;
 				int numCas = Random.Range(0, colorBaseCont.numero - 1);
 				GameObject casillaTemp = colorBaseCont.array[numCas];
 				GameObject gotaTemp;
@@ -220,7 +224,7 @@ public class LogicaControl : MonoBehaviour {
 		}
 	}
 	
-	public void cambiaColor(colorBool col, GameObject cas, controlCasilla cont, int numCas) {
+	public void cambiaColorGota(colorBool col, GameObject cas, controlCasilla cont, int numCas) {
 		Material matTemp = colBoolToMat(col);
 		controlCasilla controlTemp = matToControl(matTemp);
 		cont.quitar(numCas);
@@ -230,8 +234,16 @@ public class LogicaControl : MonoBehaviour {
 		sfxPlayer.Play();
 	}
 	
+	public void cambiaColorJug(colorBool col, GameObject cas, controlCasilla cont, int numCas) {
+		Material matTemp = colBoolToMat(col);
+		controlCasilla controlTemp = matToControl(matTemp);
+		cont.quitar(numCas);
+		controlTemp.agregar(cas);
+		cas.renderer.material = matTemp;
+	}
+	
 	private colorBool colorAleatorio(float prob) {
-		colorBool colorSalida;
+		colorBool colorSalida = new colorBool();
 		colorSalida.r = false;
 		colorSalida.g = false;
 		colorSalida.b = false;
@@ -268,7 +280,7 @@ public class LogicaControl : MonoBehaviour {
 	}
 	
 	private colorBool colorAleatorio() {
-		colorBool colorSalida;
+		colorBool colorSalida = new colorBool();
 		colorSalida.r = false;
 		colorSalida.g = false;
 		colorSalida.b = false;

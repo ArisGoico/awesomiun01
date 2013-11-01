@@ -13,7 +13,7 @@ public class scriptGota : MonoBehaviour {
 	public void tocarCasilla() {
 		if (scriptPadre == null)
 			scriptPadre = GameObject.FindGameObjectWithTag("script").GetComponent<LogicaControl>();
-		scriptPadre.cambiaColor(colorGota, casilla, control, numCasilla);
+		scriptPadre.cambiaColorGota(colorGota, casilla, control, numCasilla);
 //		Debug.Log("Tocada la casilla y teñida de " + colorGota + ".");	
 	}
 	

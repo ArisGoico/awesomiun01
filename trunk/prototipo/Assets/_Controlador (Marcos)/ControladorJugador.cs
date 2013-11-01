@@ -61,19 +61,19 @@ public class ControladorJugador : MonoBehaviour
 				{
 					casillaActualScript.quitarRojo();
 					colorBool color = casillaActualScript.color;
-					logicaControl.cambiaColor(color,casillaActual,logicaControl.matToControl(logicaControl.colBoolToMat(color)),1);
+					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
 				}
 				else if(Input.GetButton("GREEN"))
 				{
 					casillaActualScript.quitarVerde();
 					colorBool color = casillaActualScript.color;
-					logicaControl.cambiaColor(color,casillaActual,logicaControl.matToControl(logicaControl.colBoolToMat(color)),1);
+					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
 				}
 				else if(Input.GetButton("BLUE"))
 				{
 					casillaActualScript.quitarAzul();
 					colorBool color = casillaActualScript.color;
-					logicaControl.cambiaColor(color,casillaActual,logicaControl.matToControl(logicaControl.colBoolToMat(color)),1);
+					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
 				}				
 			}
 		

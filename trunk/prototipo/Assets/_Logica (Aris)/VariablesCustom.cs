@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public struct colorBool {
+public class colorBool {
 	public bool r;
 	public bool g;
 	public bool b;
