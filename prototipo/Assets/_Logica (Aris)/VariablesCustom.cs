@@ -20,7 +20,7 @@ public class controlCasilla {
 			numero = numero + 1;
 		}
 		else {
-			Debug.LogError("El array de control en el que se intenta isertar una nueva casilla esta ya lleno.");
+//			Debug.LogError("El array de control en el que se intenta isertar una nueva casilla esta ya lleno.");
 		}
 	}
 	
@@ -39,7 +39,7 @@ public class controlCasilla {
 			numero = 0;
 		}
 		else {
-			Debug.LogError("Ha fallado la operacion para quitar una posicion del array de control. Numero de elementos = " + numero + ".");
+//			Debug.LogError("Ha fallado la operacion para quitar una posicion del array de control. Numero de elementos = " + numero + ".");
 		}
 	}
 	

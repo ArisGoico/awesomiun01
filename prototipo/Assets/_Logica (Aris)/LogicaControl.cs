@@ -220,6 +220,7 @@ public class LogicaControl : MonoBehaviour {
 				gotaScriptTemp.scriptPadre = this as LogicaControl;
 				gotaScriptTemp.numCasilla = numCas;
 				gotaScriptTemp.control = colorBaseCont;
+				gotaTemp.GetComponentInChildren<Renderer>().material = colBoolToMat(gotaScriptTemp.colorGota);
 			}
 		}
 	}
@@ -324,7 +325,7 @@ public class LogicaControl : MonoBehaviour {
 			matSalida = color3;
 		else if (col.r && col.g && !col.b)		//Dos, R y G
 			matSalida = color4;
-		else if (!col.r && col.g && col.b)		//Dos, R y B
+		else if (col.r && !col.g && col.b)		//Dos, R y B
 			matSalida = color5;
 		else if (!col.r && col.g && col.b)		//Dos, G y B
 			matSalida = color6;
@@ -342,7 +343,7 @@ public class LogicaControl : MonoBehaviour {
 			sfxSalida = nota3Sample;
 		else if (col.r && col.g && !col.b)		//Dos, R y G
 			sfxSalida = nota4Sample;
-		else if (!col.r && col.g && col.b)		//Dos, R y B
+		else if (col.r && !col.g && col.b)		//Dos, R y B
 			sfxSalida = nota5Sample;
 		else if (!col.r && col.g && col.b)		//Dos, G y B
 			sfxSalida = nota6Sample;
