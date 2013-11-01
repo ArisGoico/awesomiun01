@@ -4,8 +4,8 @@ using System.Collections;
 public class LogicaControl : MonoBehaviour {
 	
 	//Variables publicas a inicializar desde el editor
-	public int ancho			= 10;
-	public int alto				= 10;
+	public int ancho			= 11;
+	public int alto				= 11;
 	public float probColor		= 0.1f;				//Probabilidad (sobre 1) para que una casilla se inicie con un color diferente al base
 	
 	public float tiempoInicio	= 5.0f;				//Tiempo en segundo spara que empiece a contar las condiciones de victoria y derrota
@@ -302,7 +302,7 @@ public class LogicaControl : MonoBehaviour {
 		return colorSalida;
 	}
 	
-	private Material colBoolToMat(colorBool col) {
+	public Material colBoolToMat(colorBool col) {
 		Material matSalida = colorBase;
 		if (col.r && !col.g && !col.b)			//Solo R
 			matSalida = color1;
@@ -338,7 +338,7 @@ public class LogicaControl : MonoBehaviour {
 		return sfxSalida;
 	}
 	
-	private controlCasilla matToControl(Material mat) {
+	public controlCasilla matToControl(Material mat) {
 		if (mat.Equals(color1))
 			return color1Cont;
 		else if (mat.Equals(color2))
