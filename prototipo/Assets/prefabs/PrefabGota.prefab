@@ -114,6 +114,7 @@ MonoBehaviour:
   casilla: {fileID: 0}
   numCasilla: 0
   scriptPadre: {fileID: 0}
+  splash: {fileID: 100002, guid: 6afdd3338ba75b44b80f1ca3f4cca5b0, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

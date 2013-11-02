@@ -302,7 +302,7 @@ MonoBehaviour:
   flareColorC: {r: .800000012, g: .400000006, b: .800000012, a: .75}
   flareColorD: {r: .800000012, g: .400000006, b: 0, a: .75}
   blurWidth: 1
-  lensFlareVignetteMask: {fileID: 2800000, guid: 95ef4804fe0be4c999ddaa383536cde8,
+  lensFlareVignetteMask: {fileID: 2800000, guid: 1da6542955cc90e4282f1fa576c9d123,
     type: 3}
   lensFlareShader: {fileID: 4800000, guid: 459fe69d2f6d74ddb92f04dbf45a866b, type: 3}
   vignetteShader: {fileID: 4800000, guid: 562f620336e024ac99992ff05725a89a, type: 3}
@@ -743,6 +743,14 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: e7365dfd623bcf94284d54b19c2f33a3, type: 2}
+      propertyPath: lensFlareVignetteMask
+      value: 
+      objectReference: {fileID: 2800000, guid: 1da6542955cc90e4282f1fa576c9d123, type: 3}
+    - target: {fileID: 11400004, guid: e7365dfd623bcf94284d54b19c2f33a3, type: 2}
+      propertyPath: lensflareMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e7365dfd623bcf94284d54b19c2f33a3, type: 2}
   m_RootGameObject: {fileID: 15469569}
@@ -791,7 +799,7 @@ MonoBehaviour:
   alto: 10
   probColor: .100000001
   tiempoInicio: 5
-  prefabCasilla: {fileID: 100002, guid: 7f982390a5bc1e745b7de45f305dd593, type: 2}
+  prefabCasilla: {fileID: 100000, guid: 7f982390a5bc1e745b7de45f305dd593, type: 2}
   prefabJugador: {fileID: 100000, guid: e7365dfd623bcf94284d54b19c2f33a3, type: 2}
   prefabGota: {fileID: 100000, guid: ad554ea0b50b0d84ea9c6e0f71bf3b8b, type: 2}
   colorBase: {fileID: 2100000, guid: dae34332e01df9c489b627bd9d97ac6c, type: 2}
