@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: gota
-  m_Shader: {fileID: 10, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 6, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_SavedProperties:
     serializedVersion: 2
@@ -30,7 +30,7 @@ Material:
       data:
         first:
           name: _Shininess
-        second: .0284516253
+        second: .0936210379
       data:
         first:
           name: _EmissionLM
@@ -39,12 +39,12 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0, g: .513793111, b: .513793111, a: 1}
+        second: {r: 0, g: 0, b: 0, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: 0, g: .735294342, b: 1, a: 1}
+        second: {r: 0, g: 0, b: 0, a: 1}
       data:
         first:
           name: _Emission
-        second: {r: 0, g: 0, b: 0, a: 0}
+        second: {r: .738235295, g: .865517259, b: 0, a: 0}

@@ -228,7 +228,7 @@ public class LogicaControl : MonoBehaviour {
 				gotaScriptTemp.scriptPadre = this as LogicaControl;
 				gotaScriptTemp.numCasilla = numCas;
 				gotaScriptTemp.control = colorBaseCont;
-				gotaTemp.GetComponentInChildren<Renderer>().material = colBoolToMat(gotaScriptTemp.colorGota);
+				gotaTemp.GetComponentInChildren<Renderer>().material.SetColor("_Emission", colBoolToMat(gotaScriptTemp.colorGota).GetColor("_SpecColor"));
 			}
 		}
 	}
