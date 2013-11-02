@@ -795,8 +795,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d4905f613f7a7c4c9c02630205257df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ancho: 10
-  alto: 10
+  ancho: 11
+  alto: 11
   probColor: .100000001
   tiempoInicio: 5
   prefabCasilla: {fileID: 100000, guid: 7f982390a5bc1e745b7de45f305dd593, type: 2}
@@ -822,6 +822,7 @@ MonoBehaviour:
   musicaPlayer: {fileID: 1255290516}
   ritmoPlayer: {fileID: 605468163}
   sfxPlayer: {fileID: 53056416}
+  modoDebugGota: 0
 --- !u!114 &1813060894
 MonoBehaviour:
   m_ObjectHideFlags: 0

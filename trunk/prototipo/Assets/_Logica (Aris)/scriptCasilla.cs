@@ -6,8 +6,22 @@ public class scriptCasilla : MonoBehaviour {
 
 	//Este script solo contiene variables publicas para usar por el resto de scripts
 	public colorBool color;
-	public int ordenControl;
+	public int ordenControl;	
 	public controlCasilla control;
+	
+	////////////////////////////////////////////////////////////////////////////////////////////	
+	//TEST
+	public bool red;
+	public bool yellow;
+	public bool blue;
+	
+	public void Update()
+	{
+		red = color.r;
+		yellow = color.g;
+		blue = color.b;	
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////	
 	
 	public void aplicarRojo()
 	{

@@ -64,6 +64,8 @@ public class LogicaControl : MonoBehaviour {
 	private bool iniciaRitmo		= false;
 	private bool ritmoComboPlaying	= false;
 	
+	/* DEBUG */
+	public bool modoDebugGota		= true;
 	
 	//-----------------------------------------------------------------Funciones behavioural del script----------------------------------------------------------------------------
 	
@@ -91,6 +93,11 @@ public class LogicaControl : MonoBehaviour {
 				casillaTemp.GetComponent<scriptCasilla>().control = controlTemp;
 			}
 		}
+		
+		/* DEBUG */
+		modoDebugGota = true;
+		Debug.Log(modoDebugGota ? "Modo lanzar gotas manualmente activado" : "Modo lanzar gotas manualmente desactivado");
+		/* -------------- */
 	}
 	
 	
@@ -107,7 +114,22 @@ public class LogicaControl : MonoBehaviour {
 			}
 		}		
 		controlRitmo();		//Control del tiempo y el sonido. Inicializa "iniciaRitmo" en intervalos adecuados
-		controlGotas();		//Control de lanzamiento de gotas
+		
+		/* DEBUG LANZAR GOTA */
+		if(Input.GetKeyDown(KeyCode.X))
+		{
+			modoDebugGota = !modoDebugGota;	
+			Debug.Log(modoDebugGota ? "Modo lanzar gotas manualmente activado" : "Modo lanzar gotas manualmente desactivado");
+		}
+		if(modoDebugGota)
+		{
+			if(Input.GetKeyDown(KeyCode.Space))
+				lanzarGota();	
+		}
+		else
+		/* ---------------- */
+			controlGotas();		//Control de lanzamiento de gotas
+		
 	}
 	
 	void OnGUI() {
@@ -233,12 +255,35 @@ public class LogicaControl : MonoBehaviour {
 		}
 	}
 	
+	/* DEBUG LANZAR GOTA */
+	private void lanzarGota() 
+	{		
+		int numCas = Random.Range(0, colorBaseCont.numero - 1);
+		GameObject casillaTemp = colorBaseCont.array[numCas];
+		GameObject gotaTemp;
+		gotaTemp = Instantiate(prefabGota, casillaTemp.transform.position, casillaTemp.transform.rotation) as GameObject;
+		scriptGota gotaScriptTemp = gotaTemp.GetComponentInChildren<scriptGota>();
+		gotaScriptTemp.colorGota = colorAleatorio();
+		gotaScriptTemp.casilla = casillaTemp;
+		gotaScriptTemp.scriptPadre = this as LogicaControl;
+		gotaScriptTemp.numCasilla = numCas;
+		gotaScriptTemp.control = colorBaseCont;
+		gotaTemp.GetComponentInChildren<Renderer>().material.SetColor("_Emission", colBoolToMat(gotaScriptTemp.colorGota).GetColor("_SpecColor"));		
+	}
+	/* -----------------------*/
+	
 	public void cambiaColorGota(colorBool col, GameObject cas, controlCasilla cont, int numCas) {
 		Material matTemp = colBoolToMat(col);
 		controlCasilla controlTemp = matToControl(matTemp);
 		cont.quitar(numCas);
 		controlTemp.agregar(cas);
 		cas.renderer.material = matTemp;
+		
+		/* MARCOS: SUSTITUYO LOS BOOLEANOS DE LA CASILLA POR LOS DE LA GOTA, QUE SE TE HABIA OLVIDADO HACERLO ARIS */
+		scriptCasilla casilla = cas.GetComponent<scriptCasilla>();
+		casilla.color = col;
+		/* ---------------- */
+		
 		sfxPlayer.clip = colBoolToSFX(col);
 		sfxPlayer.Play();
 	}
