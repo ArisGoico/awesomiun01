@@ -27,24 +27,50 @@ public class scriptCasilla : MonoBehaviour {
 	{
 		color.r = true;		
 	}
+	
 	public void aplicarVerde()
 	{
 		color.g = true;		
 	}
+	
 	public void aplicarAzul()
 	{
 		color.b = true;		
 	}
-	public void quitarRojo()
+	
+	/* Devuelve true si se ha podido quitar rojo */
+	public bool quitarRojo()
 	{
-		color.r = false;		
+		if(color.r)
+		{
+			color.r = false;
+			return true;
+		}
+		else
+			return false;
 	}
-	public void quitarVerde()
+	
+	/* Devuelve true si se ha podido quitar verde */
+	public bool quitarVerde()
 	{
-		color.g = false;		
+		if(color.r)
+		{
+			color.g = false;
+			return true;
+		}
+		else
+			return false;	
 	}
-	public void quitarAzul()
+	
+	/* Devuelve true si se ha podido quitar azul */
+	public bool quitarAzul()
 	{
-		color.b = false;		
+		if(color.r)
+		{
+			color.b = false;
+			return true;
+		}
+		else
+			return false;		
 	}	
 }

@@ -58,27 +58,30 @@ public class ControladorJugador : MonoBehaviour
 				else if(Input.GetButton("Fire1") && !absorbiendo)
 				{	
 					absorbiendo = true;
+					animation.PlayQueued("absorber");					
 					lastPressTime = Time.time;
-					animation.PlayQueued("absorber");
-					casillaActualScript.quitarRojo();
+					if(casillaActualScript.quitarRojo())
+						;//ANIMACION QUITAR COLOR
 					colorBool color = casillaActualScript.color;
 					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
 				}
 				else if(Input.GetButton("Fire2") && !absorbiendo)
 				{
 					absorbiendo = true;
+					animation.PlayQueued("absorber");					
 					lastPressTime = Time.time;
-					animation.PlayQueued("absorber");
-					casillaActualScript.quitarVerde();
+					if(casillaActualScript.quitarVerde())
+						;//ANIMACION QUITAR COLOR
 					colorBool color = casillaActualScript.color;
 					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
 				}
 				else if(Input.GetButton("Fire3") && !absorbiendo)
 				{
 					absorbiendo = true;
+					animation.PlayQueued("absorber");					
 					lastPressTime = Time.time;
-					animation.PlayQueued("absorber");
-					casillaActualScript.quitarAzul();
+					if(casillaActualScript.quitarAzul())
+						;//ANIMACION QUITAR COLOR
 					colorBool color = casillaActualScript.color;
 					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
 				}				
