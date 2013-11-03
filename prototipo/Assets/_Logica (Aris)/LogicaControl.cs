@@ -278,12 +278,9 @@ public class LogicaControl : MonoBehaviour {
 		cont.quitar(numCas);
 		controlTemp.agregar(cas);
 		cas.renderer.material = matTemp;
-		
-		/* MARCOS: SUSTITUYO LOS BOOLEANOS DE LA CASILLA POR LOS DE LA GOTA, QUE SE TE HABIA OLVIDADO HACERLO ARIS */
 		scriptCasilla casilla = cas.GetComponent<scriptCasilla>();
 		casilla.color = col;
-		/* ---------------- */
-		
+		casilla.control = controlTemp;
 		sfxPlayer.clip = colBoolToSFX(col);
 		sfxPlayer.Play();
 	}
@@ -294,6 +291,8 @@ public class LogicaControl : MonoBehaviour {
 		cont.quitar(numCas);
 		controlTemp.agregar(cas);
 		cas.renderer.material = matTemp;
+		scriptCasilla casilla = cas.GetComponent<scriptCasilla>();
+		casilla.control = controlTemp;
 	}
 	
 	private colorBool colorAleatorio(float prob) {
