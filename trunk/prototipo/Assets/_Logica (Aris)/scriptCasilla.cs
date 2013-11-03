@@ -53,7 +53,7 @@ public class scriptCasilla : MonoBehaviour {
 	/* Devuelve true si se ha podido quitar verde */
 	public bool quitarVerde()
 	{
-		if(color.r)
+		if(color.g)
 		{
 			color.g = false;
 			return true;
@@ -65,7 +65,7 @@ public class scriptCasilla : MonoBehaviour {
 	/* Devuelve true si se ha podido quitar azul */
 	public bool quitarAzul()
 	{
-		if(color.r)
+		if(color.b)
 		{
 			color.b = false;
 			return true;
