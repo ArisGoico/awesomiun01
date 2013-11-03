@@ -15,6 +15,8 @@ public class LogicaControl : MonoBehaviour {
 	public GameObject prefabCasilla;
 	public GameObject prefabJugador;
 	public GameObject prefabGota;
+	public GameObject coloresIfaz;
+	public GameObject blancosIfaz;
 	
 	//Colores (Materiales)
 	public Material colorBase;
@@ -52,8 +54,9 @@ public class LogicaControl : MonoBehaviour {
 	private controlCasilla colorBaseCont;
 	private controlCasilla colorNegroCont;
 	
-	private int totalColores 		= 0;
+	private float totalColores 		= 0;
 //	private int totalNoBase 		= 0;
+	private float tamañoInterfaz;
 	
 	private int dificultad			= 2;
 	
@@ -104,6 +107,9 @@ public class LogicaControl : MonoBehaviour {
 	void Update () {
 		totalColores = color1Cont.numero + color2Cont.numero + color3Cont.numero + color4Cont.numero + color5Cont.numero + color6Cont.numero;
 //		totalNoBase = ancho * alto - colorBaseCont.numero;
+		tamañoInterfaz = totalColores / (ancho * alto);
+		coloresIfaz.transform.localScale = new Vector3(tamañoInterfaz, tamañoInterfaz, tamañoInterfaz);
+		blancosIfaz.transform.localScale = new Vector3(1.0f  - tamañoInterfaz, 1.0f  - tamañoInterfaz, 1.0f  - tamañoInterfaz);
 		
 		if (Time.time >= tiempoInicio) {
 			if (condicionDerrota()) {
