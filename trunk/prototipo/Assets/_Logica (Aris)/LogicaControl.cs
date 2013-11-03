@@ -68,7 +68,7 @@ public class LogicaControl : MonoBehaviour {
 	private bool ritmoComboPlaying	= false;
 	
 	/* DEBUG */
-	public bool modoDebugGota		= true;
+	public bool modoDebugGota		= false;
 	
 	//-----------------------------------------------------------------Funciones behavioural del script----------------------------------------------------------------------------
 	
@@ -83,7 +83,6 @@ public class LogicaControl : MonoBehaviour {
 		for (int i = 0; i < alto; i++) {
 			for (int j = 0; j < ancho; j++) {
 				GameObject casillaTemp;
-				//Quaternion.Euler(new Vector3(90, 0, 0))
 				casillaTemp = Instantiate(prefabCasilla, posInicial + Vector3.right * j + Vector3.forward * i, prefabCasilla.transform.rotation) as GameObject;
 				casillaTemp.name = "Casilla_" + i + "_" + j;
 				casillaTemp.transform.parent = tablero.transform;
@@ -96,17 +95,13 @@ public class LogicaControl : MonoBehaviour {
 				casillaTemp.GetComponent<scriptCasilla>().control = controlTemp;
 			}
 		}
-		
-		/* DEBUG */
-		modoDebugGota = true;
-		Debug.Log(modoDebugGota ? "Modo lanzar gotas manualmente activado" : "Modo lanzar gotas manualmente desactivado");
-		/* -------------- */
 	}
 	
 	
 	void Update () {
 		totalColores = color1Cont.numero + color2Cont.numero + color3Cont.numero + color4Cont.numero + color5Cont.numero + color6Cont.numero;
 //		totalNoBase = ancho * alto - colorBaseCont.numero;
+		
 		tamañoInterfaz = totalColores / (ancho * alto);
 		coloresIfaz.transform.localScale = new Vector3(tamañoInterfaz, tamañoInterfaz, tamañoInterfaz);
 		blancosIfaz.transform.localScale = new Vector3(1.0f  - tamañoInterfaz, 1.0f  - tamañoInterfaz, 1.0f  - tamañoInterfaz);
@@ -124,12 +119,11 @@ public class LogicaControl : MonoBehaviour {
 		/* DEBUG LANZAR GOTA */
 		if(Input.GetKeyDown(KeyCode.X))
 		{
-			modoDebugGota = !modoDebugGota;	
-			Debug.Log(modoDebugGota ? "Modo lanzar gotas manualmente activado" : "Modo lanzar gotas manualmente desactivado");
+			modoDebugGota = !modoDebugGota;		
 		}
 		if(modoDebugGota)
 		{
-			if(Input.GetKeyDown(KeyCode.Space))
+			if(Input.GetButtonDown("Jump"))
 				lanzarGota();	
 		}
 		else
@@ -139,8 +133,10 @@ public class LogicaControl : MonoBehaviour {
 	}
 	
 	void OnGUI() {
-		GUI.Label(new Rect(10, 10, 300, 20), "Num. casillas otro color: " + totalColores);
-		GUI.Label(new Rect(10, 35, 300, 20), "Num. casillas base: " + colorBaseCont.numero);
+		if (modoDebugGota) {
+			GUI.Label(new Rect(10, 10, 300, 20), "Num. casillas otro color: " + totalColores);
+			GUI.Label(new Rect(10, 35, 300, 20), "Num. casillas base: " + colorBaseCont.numero);
+		}
 	}
 	
 	

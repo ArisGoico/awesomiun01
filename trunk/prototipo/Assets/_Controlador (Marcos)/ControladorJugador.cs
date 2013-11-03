@@ -34,7 +34,7 @@ public class ControladorJugador : MonoBehaviour
 				casillaActual = Utilidades.dameCasilla(x,z);
 				casillaActualScript = casillaActual.GetComponent<scriptCasilla>();
 				// Movimiento
-				if((Input.GetAxisRaw("Vertical") != 0) && !animation.IsPlaying("subir"))
+				if((Input.GetAxisRaw("Vertical") != 0) && !(animation.IsPlaying("subir") || animation.IsPlaying("bajar")))
 				{
 					lastPressTime = Time.time;				
 					if(Utilidades.hayCasilla(x,z+Input.GetAxisRaw("Vertical")))
@@ -44,7 +44,7 @@ public class ControladorJugador : MonoBehaviour
 						animation.PlayQueued("subir");
 					}
 				}
-				if((Input.GetAxisRaw("Horizontal") != 0) && !animation.IsPlaying("subir"))
+				if((Input.GetAxisRaw("Horizontal") != 0) && !(animation.IsPlaying("subir") || animation.IsPlaying("bajar")))
 				{
 					lastPressTime = Time.time;				
 					if(Utilidades.hayCasilla(x+Input.GetAxisRaw("Horizontal"),z))
