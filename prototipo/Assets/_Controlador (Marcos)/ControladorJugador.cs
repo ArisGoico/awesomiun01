@@ -11,12 +11,13 @@ public class ControladorJugador : MonoBehaviour
 	private float z;
 	private GameObject casillaActual;	
 	private scriptCasilla casillaActualScript;
+	public Transform absorberBits; 
 	
 	public void Start()
 	{
 		//Inicializa variables de uso comun
 		logicaControl = GameObject.FindGameObjectWithTag("script").GetComponent<LogicaControl>();
-			
+		Debug.Log(absorberBits.ToString());
 		
 		//Posiciona al jugador en el centro del tablero
 		int xMedio = logicaControl.ancho/2;
@@ -57,31 +58,34 @@ public class ControladorJugador : MonoBehaviour
 				//Acciones casilla
 				else if(Input.GetButton("Fire1") && !absorbiendo)
 				{	
-					absorbiendo = true;
-					animation.PlayQueued("absorber");					
+					absorbiendo = true;					
 					lastPressTime = Time.time;
-					if(casillaActualScript.quitarRojo())
-						;//ANIMACION QUITAR COLOR
+					if(casillaActualScript.quitarRojo()){
+						absorberBits.particleSystem.renderer.material.SetColor("_Emission", Color.red);
+						animation.PlayQueued("absorber");
+					}
 					colorBool color = casillaActualScript.color;
 					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
 				}
 				else if(Input.GetButton("Fire2") && !absorbiendo)
 				{
-					absorbiendo = true;
-					animation.PlayQueued("absorber");					
+					absorbiendo = true;				
 					lastPressTime = Time.time;
-					if(casillaActualScript.quitarVerde())
-						;//ANIMACION QUITAR COLOR
+					if(casillaActualScript.quitarVerde()){
+						absorberBits.particleSystem.renderer.material.SetColor("_Emission", Color.yellow);
+						animation.PlayQueued("absorber");
+					}
 					colorBool color = casillaActualScript.color;
 					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
 				}
 				else if(Input.GetButton("Fire3") && !absorbiendo)
 				{
-					absorbiendo = true;
-					animation.PlayQueued("absorber");					
+					absorbiendo = true;					
 					lastPressTime = Time.time;
-					if(casillaActualScript.quitarAzul())
-						;//ANIMACION QUITAR COLOR
+					if(casillaActualScript.quitarAzul()){
+						absorberBits.particleSystem.renderer.material.SetColor("_Emission", Color.blue);
+						animation.PlayQueued("absorber");
+					}
 					colorBool color = casillaActualScript.color;
 					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
 				}				
