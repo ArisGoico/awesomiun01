@@ -36,21 +36,45 @@ AnimationClip:
         inSlope: {x: 3.48820051e-33, y: .0750652924, z: 0}
         outSlope: {x: 6.18782393e-22, y: .0750652924, z: 0}
         tangentMode: -559038737
-      - time: .333333313
+      - time: .5
         value: {x: 0, y: .400000006, z: 0}
         inSlope: {x: 0, y: -.0488933809, z: 0}
         outSlope: {x: 0, y: -.0488933809, z: 0}
         tangentMode: -559038737
-      - time: .416666687
+      - time: .583333313
         value: {x: 0, y: .25, z: 0}
-        inSlope: {x: 0, y: -1.79999924, z: 0}
-        outSlope: {x: 0, y: -1.79999924, z: 0}
+        inSlope: {x: 0, y: -1.80000055, z: 0}
+        outSlope: {x: 0, y: -1.80000055, z: 0}
         tangentMode: -559038737
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: Jugador
   m_ScaleCurves: []
-  m_FloatCurves: []
+  m_FloatCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: .0166666675
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: .566666663
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: EmissionModule.enabled
+    path: absorbBits
+    classID: 198
+    script: {fileID: 0}
   m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
@@ -141,15 +165,15 @@ AnimationClip:
         inSlope: .0750652924
         outSlope: .0750652924
         tangentMode: 0
-      - time: .333333313
+      - time: .5
         value: .400000006
         inSlope: -.0488933809
         outSlope: -.0488933809
         tangentMode: 0
-      - time: .416666687
+      - time: .583333313
         value: .25
-        inSlope: -1.79999924
-        outSlope: -1.79999924
+        inSlope: -1.80000055
+        outSlope: -1.80000055
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -171,9 +195,33 @@ AnimationClip:
     path: Jugador
     classID: 4
     script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: .0166666675
+        value: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      - time: .566666663
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: EmissionModule.enabled
+    path: absorbBits
+    classID: 198
+    script: {fileID: 0}
   m_EulerEditorCurves: []
   m_Events:
-  - time: .416666657
+  - time: .583333313
     functionName: dejaAbsorbe
     data: 
     objectReferenceParameter: {fileID: 0}
