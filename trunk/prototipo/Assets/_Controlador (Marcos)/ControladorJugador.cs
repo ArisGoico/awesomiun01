@@ -4,6 +4,7 @@ using System.Collections;
 public class ControladorJugador : MonoBehaviour
 {
 	public float delayMovimiento = 0.25f;
+	public float delayAbsorber = 0.5f;
 	private float lastPressTime = 0.0f;
 	private bool absorbiendo = false;
 	private LogicaControl logicaControl;
@@ -55,10 +56,11 @@ public class ControladorJugador : MonoBehaviour
 						animation.PlayQueued("subir");
 					}
 				}
+			}
+			if(Time.time > lastPressTime + delayAbsorber){
 				//Acciones casilla
-				else if(Input.GetButton("Fire1") && !absorbiendo)
-				{	
-					absorbiendo = true;					
+				if(Input.GetButton("Fire1"))
+				{						
 					lastPressTime = Time.time;
 					if(casillaActualScript.quitarRojo()){
 						absorberBits.particleSystem.renderer.material.SetColor("_Emission", Color.red);
@@ -67,9 +69,8 @@ public class ControladorJugador : MonoBehaviour
 					colorBool color = casillaActualScript.color;
 					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
 				}
-				else if(Input.GetButton("Fire2") && !absorbiendo)
-				{
-					absorbiendo = true;				
+				else if(Input.GetButton("Fire2"))// && !(animation.IsPlaying("subir")))
+				{				
 					lastPressTime = Time.time;
 					if(casillaActualScript.quitarVerde()){
 						absorberBits.particleSystem.renderer.material.SetColor("_Emission", Color.yellow);
@@ -78,13 +79,12 @@ public class ControladorJugador : MonoBehaviour
 					colorBool color = casillaActualScript.color;
 					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
 				}
-				else if(Input.GetButton("Fire3") && !absorbiendo)
-				{
-					absorbiendo = true;					
+				else if(Input.GetButton("Fire3"))// && !(animation.IsPlaying("subir")))
+				{				
 					lastPressTime = Time.time;
 					if(casillaActualScript.quitarAzul()){
-						absorberBits.particleSystem.renderer.material.SetColor("_Emission", Color.blue);
 						animation.PlayQueued("absorber");
+						absorberBits.particleSystem.renderer.material.SetColor("_Emission", new Color(0.0f, 0.2f, 1.0f, 1.0f));
 					}
 					colorBool color = casillaActualScript.color;
 					logicaControl.cambiaColorJug(color, casillaActual, casillaActualScript.control, casillaActualScript.ordenControl);
