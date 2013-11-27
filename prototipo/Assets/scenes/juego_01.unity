@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayMovimiento: .25
+  delayAbsorber: .5
   absorberBits: {fileID: 1607680628}
 --- !u!111 &15469572
 Animation:
@@ -645,6 +646,10 @@ Prefab:
     - target: {fileID: 19800000, guid: c2e26cecfc9088443bed936635caa320, type: 2}
       propertyPath: EmissionModule.enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: c2e26cecfc9088443bed936635caa320, type: 2}
+      propertyPath: EmissionModule.rate.scalar
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2e26cecfc9088443bed936635caa320, type: 2}
@@ -1288,7 +1293,7 @@ ParticleSystem:
     enabled: 0
     m_Type: 0
     rate:
-      scalar: 10
+      scalar: 20
       maxCurve:
         serializedVersion: 2
         m_Curve:

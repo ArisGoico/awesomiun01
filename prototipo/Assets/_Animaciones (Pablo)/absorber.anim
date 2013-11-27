@@ -28,23 +28,23 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: {x: 0, y: .25, z: 0}
-        inSlope: {x: 3.48820051e-33, y: 1.80000007, z: 0}
-        outSlope: {x: 6.18782393e-22, y: 1.80000007, z: 0}
+        inSlope: {x: 3.48820051e-33, y: 2.18719268, z: 0}
+        outSlope: {x: 6.18782393e-22, y: 2.18719268, z: 0}
         tangentMode: -559038737
       - time: .0833333358
-        value: {x: 0, y: .400000006, z: 0}
+        value: {x: 0, y: .432266057, z: 0}
         inSlope: {x: 3.48820051e-33, y: .0750652924, z: 0}
         outSlope: {x: 6.18782393e-22, y: .0750652924, z: 0}
         tangentMode: -559038737
-      - time: .5
-        value: {x: 0, y: .400000006, z: 0}
+      - time: .583333313
+        value: {x: 0, y: .432266057, z: 0}
         inSlope: {x: 0, y: -.0488933809, z: 0}
         outSlope: {x: 0, y: -.0488933809, z: 0}
         tangentMode: -559038737
-      - time: .583333313
+      - time: .666666627
         value: {x: 0, y: .25, z: 0}
-        inSlope: {x: 0, y: -1.80000055, z: 0}
-        outSlope: {x: 0, y: -1.80000055, z: 0}
+        inSlope: {x: 0, y: -2.18719316, z: 0}
+        outSlope: {x: 0, y: -2.18719316, z: 0}
         tangentMode: -559038737
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -157,23 +157,23 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: .25
-        inSlope: 1.80000007
-        outSlope: 1.80000007
+        inSlope: 2.18719268
+        outSlope: 2.18719268
         tangentMode: 10
       - time: .0833333358
-        value: .400000006
+        value: .432266057
         inSlope: .0750652924
         outSlope: .0750652924
         tangentMode: 0
-      - time: .5
-        value: .400000006
+      - time: .583333313
+        value: .432266057
         inSlope: -.0488933809
         outSlope: -.0488933809
         tangentMode: 0
-      - time: .583333313
+      - time: .666666627
         value: .25
-        inSlope: -1.80000055
-        outSlope: -1.80000055
+        inSlope: -2.18719316
+        outSlope: -2.18719316
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -221,7 +221,7 @@ AnimationClip:
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_Events:
-  - time: .583333313
+  - time: .666666687
     functionName: dejaAbsorbe
     data: 
     objectReferenceParameter: {fileID: 0}
