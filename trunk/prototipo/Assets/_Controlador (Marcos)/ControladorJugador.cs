@@ -18,7 +18,6 @@ public class ControladorJugador : MonoBehaviour
 	{
 		//Inicializa variables de uso comun
 		logicaControl = GameObject.FindGameObjectWithTag("script").GetComponent<LogicaControl>();
-		Debug.Log(absorberBits.ToString());
 		
 		//Posiciona al jugador en el centro del tablero
 		int xMedio = logicaControl.ancho/2;

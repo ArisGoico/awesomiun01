@@ -17,6 +17,7 @@ public class LogicaControl : MonoBehaviour {
 	public GameObject prefabGota;
 	public GameObject coloresIfaz;
 	public GameObject blancosIfaz;
+	public GUIText endGameText;
 	
 	//Colores (Materiales)
 	public Material colorBase;
@@ -109,9 +110,19 @@ public class LogicaControl : MonoBehaviour {
 		if (Time.time >= tiempoInicio) {
 			if (condicionDerrota()) {
 				Debug.Log("Se ha cumplido la condicion de derrota.");
+				//endGameText.enabled = true;
+				//endGameText.text = "Game Over";
+				if(Input.anyKey){
+					SendMessage ("fadeAndLoad", "MainMenu");
+				}
 			}
 			else if (condicionVictoria()) {
 				Debug.Log("Se ha cumplido la condicion de victoria!!");
+				//endGameText.enabled = true;
+				//endGameText.text = "Victory!";
+				if(Input.anyKey){
+					SendMessage ("fadeAndLoad", "MainMenu");
+				}
 			}
 		}		
 		controlRitmo();		//Control del tiempo y el sonido. Inicializa "iniciaRitmo" en intervalos adecuados
