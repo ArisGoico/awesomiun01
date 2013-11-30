@@ -17,7 +17,6 @@ public class LogicaControl : MonoBehaviour {
 	public GameObject prefabGota;
 	public GameObject coloresIfaz;
 	public GameObject blancosIfaz;
-	public GUIText endGameText;
 	
 	//Colores (Materiales)
 	public Material colorBase;
@@ -68,6 +67,8 @@ public class LogicaControl : MonoBehaviour {
 	private bool iniciaRitmo		= false;
 	private bool ritmoComboPlaying	= false;
 	
+	private bool endGameShow		= false;
+	private string endGameText		= "";
 	/* DEBUG */
 	public bool modoDebugGota		= false;
 	
@@ -110,16 +111,17 @@ public class LogicaControl : MonoBehaviour {
 		if (Time.time >= tiempoInicio) {
 			if (condicionDerrota()) {
 				Debug.Log("Se ha cumplido la condicion de derrota.");
-				//endGameText.enabled = true;
-				//endGameText.text = "Game Over";
+				endGameShow = true;
+				endGameText = "Game Over";
+				SendMessage ("fadeOut");
 				if(Input.anyKey){
-					SendMessage ("fadeAndLoad", "MainMenu");
+					Application.LoadLevel("MainMenu");
 				}
 			}
 			else if (condicionVictoria()) {
 				Debug.Log("Se ha cumplido la condicion de victoria!!");
-				//endGameText.enabled = true;
-				//endGameText.text = "Victory!";
+				endGameShow = true;
+				endGameText = "Victory!";
 				if(Input.anyKey){
 					SendMessage ("fadeAndLoad", "MainMenu");
 				}
@@ -144,9 +146,16 @@ public class LogicaControl : MonoBehaviour {
 	}
 	
 	void OnGUI() {
+		GUI.skin.label.fontSize = 10;
+		GUI.skin.label.normal.textColor = Color.black;
 		if (modoDebugGota) {
 			GUI.Label(new Rect(10, 10, 300, 20), "Num. casillas otro color: " + totalColores);
 			GUI.Label(new Rect(10, 35, 300, 20), "Num. casillas base: " + colorBaseCont.numero);
+		}
+		GUI.skin.label.fontSize = 48;
+		GUI.skin.label.normal.textColor = Color.black;
+		if (endGameShow) {
+			GUI.Label(new Rect((Screen.width / 2) - 150, (Screen.height / 2) - 50, 300, 100), endGameText);
 		}
 	}
 	
@@ -462,8 +471,10 @@ public class LogicaControl : MonoBehaviour {
 	private bool condicionVictoria() {
 	
 		//Condicion: todo del color base
-		if (colorBaseCont.numero == ancho * alto)
+		if (totalColores == 0)
 			return true;
+//		if (colorBaseCont.numero == ancho * alto)
+//			return true;
 		/* Espacio para otras posibles condiciones
 		
 		//Condicion: sobrevivir sin perder tiempoSupervivencia segundos
