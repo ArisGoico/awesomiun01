@@ -19,7 +19,7 @@ function Update () {
 
 function OnGUI(){
 	if(alphaWait == false) {
-	alpha += fadeDir * fadeSpeed * Time.deltaTime;
+		alpha += fadeDir * fadeSpeed * Time.deltaTime;
 	}
 	alpha = Mathf.Clamp01(alpha);  
 	
@@ -37,11 +37,12 @@ function fadeIn(){
 }
   
 function fadeOut(){
-    fadeDir = 1; 
+    fadeDir = 1;
 }
 
 function fadeAndLoad(escena:String) {
 	fadeOut();
+	yield WaitForSeconds(fadeTime);
 	cargarEscena = escena;
 	cargar = true;
 }
