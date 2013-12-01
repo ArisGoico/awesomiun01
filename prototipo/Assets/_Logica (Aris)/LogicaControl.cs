@@ -59,6 +59,9 @@ public class LogicaControl : MonoBehaviour {
 	private float tamañoInterfaz;
 	
 	private int dificultad			= 2;
+	private bool showTutorial		= false;
+	private int tutorialPhase		= 0;
+	private TutorialScript tutScript;
 	
 	private float tiempoRitmo		= 0.6f;
 	private float tiempoUltima		= 0.0f;
@@ -75,6 +78,7 @@ public class LogicaControl : MonoBehaviour {
 	//-----------------------------------------------------------------Funciones behavioural del script----------------------------------------------------------------------------
 	
 	void Start () {
+		tutScript = this.gameObject.GetComponent<TutorialScript>();
 		initControl();
 		initAudio();
 		Screen.showCursor = false;
@@ -139,10 +143,11 @@ public class LogicaControl : MonoBehaviour {
 			if(Input.GetButtonDown("Jump"))
 				lanzarGota();	
 		}
-		else
-		/* ---------------- */
+		else if (!showTutorial)
 			controlGotas();		//Control de lanzamiento de gotas
 		
+		if (showTutorial)
+			controlTutorial();
 	}
 	
 	void OnGUI() {
@@ -172,10 +177,23 @@ public class LogicaControl : MonoBehaviour {
 		color6Cont = new controlCasilla(ancho*alto);
 		colorBaseCont = new controlCasilla(ancho*alto);
 		colorNegroCont = new controlCasilla(ancho*alto);
-		if (PlayerPrefs.HasKey("dif")) 
+		if (PlayerPrefs.HasKey("dif")) {
 			dificultad = PlayerPrefs.GetInt("dif");
-		else
+			Debug.Log("Dificultad encontrada en PlayerPrefs == " + dificultad + ".");
+		}
+		else {
 			dificultad = 2;
+			Debug.Log("Dificultad no encontrada en PlayerPrefs.");
+		}
+		if (dificultad == 0) {
+			if (tutScript != null) {
+				showTutorial = true;
+				tiempoInicio = 2000f;
+			}
+			else {
+				Debug.Log("El script de tutorial esta vacio.");
+			}
+		}
 	}
 	
 	private void initAudio() {
@@ -245,12 +263,15 @@ public class LogicaControl : MonoBehaviour {
 			float probGotas = 0.0f;
 			switch (dificultad) {
 				case 0:
-					probGotas = 0.03f;
+					probGotas = 0.02f;
 					break;
 				case 1:
-					probGotas = 0.08f;
+					probGotas = 0.03f;
 					break;
 				case 2: 
+					probGotas = 0.08f;
+					break;
+				case 3:
 					probGotas = 0.2f;
 					break;
 				default:
@@ -483,5 +504,23 @@ public class LogicaControl : MonoBehaviour {
 		*/
 		
 		return false;
+	}
+	
+	private void controlTutorial() {
+		Debug.Log("Entering controlTutorial function.");
+		if (Time.time > 10f && tutorialPhase == 0) {
+			tutScript.launchTutorial(0, 15f);
+			tutorialPhase = 1;
+		}
+		if (Time.time > 15f && tutorialPhase == 1) {
+			tutScript.launchTutorial(1, 15f);
+			tutorialPhase = 2;
+		}
+		if (Time.time > 20f && tutorialPhase == 2) {
+			tutScript.launchTutorial(2, 15f);
+			tutorialPhase = 2;
+			tiempoInicio = Time.time + 10f;
+			showTutorial = false;
+		}
 	}
 }

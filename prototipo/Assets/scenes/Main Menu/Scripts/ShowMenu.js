@@ -11,7 +11,7 @@ var volBar:GameObject;
 var volBarBg:GameObject;
 var camara:GameObject;
 
-enum Dificultad {Bajo, Medio, Alto};
+enum Dificultad {Tutorial,Bajo, Medio, Alto};
 
 //sonidos
 var selectSnd:AudioClip;
@@ -37,6 +37,7 @@ function Start () {
 	textoVisible();
 	cursorVisible();
 	sliderVol = PlayerPrefs.GetFloat("vol");
+	audio.volume = sliderVol;
 	volBar.guiTexture.pixelInset.width=sliderVol*195;
 	dif = PlayerPrefs.GetInt("dif");
 	textoDif2.guiText.text = "\t" + dif.ToString();
@@ -109,10 +110,11 @@ function OnGUI () {
 			horizontal = true;
 			audio.PlayOneShot(selectSnd);
 			dif = (dif + 1*Mathf.FloorToInt(Input.GetAxisRaw("Horizontal")));
-			if (dif >2) dif = Dificultad.Bajo;
-			if (dif <0) dif = Dificultad.Alto;
+			if (dif > 3) dif = Dificultad.Tutorial;
+			if (dif < 0) dif = Dificultad.Alto;
 			textoDif2.guiText.text = "\t" + dif.ToString();
 			PlayerPrefs.SetInt("dif", dif);
+//			Debug.Log("Dif set to: " + Number(dif) + ".");
 			esperaHorizontal(0.3f);
 		}
 					

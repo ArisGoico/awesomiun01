@@ -16,6 +16,7 @@ public class ControladorJugador : MonoBehaviour
 	private Vector3 targetPosition;
 	private bool moving = false;
 	private float movementSpeed = 6.5f;
+	
 	public void Start()
 	{
 		//Inicializa variables de uso comun
