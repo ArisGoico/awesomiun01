@@ -2114,6 +2114,7 @@ GameObject:
   - 4: {fileID: 1813060892}
   - 114: {fileID: 1813060893}
   - 114: {fileID: 1813060894}
+  - 114: {fileID: 1813060895}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: script
@@ -2188,6 +2189,24 @@ MonoBehaviour:
   fadeSpeed: 1
   fadeTime: 3
   alphaWait: 1
+--- !u!114 &1813060895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1813060891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df3ae9092bdb2b349809921970c3c6d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 15469569}
+  splashImage: {fileID: 0}
+  tutorial:
+  - {fileID: 2800000, guid: 1281ff47598ee3142bd730108e6fb6df, type: 3}
+  - {fileID: 2800000, guid: a4b026bf0d45fee449e4881a8a7c7448, type: 3}
+  - {fileID: 2800000, guid: 3b03deab911538141b83d2635bdf2bba, type: 3}
+  splashTime: 0
 --- !u!1 &2046504755
 GameObject:
   m_ObjectHideFlags: 0
