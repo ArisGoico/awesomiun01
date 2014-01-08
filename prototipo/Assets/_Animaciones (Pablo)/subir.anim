@@ -6,9 +6,10 @@ AnimationClip:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: subir
-  serializedVersion: 3
+  serializedVersion: 4
   m_AnimationType: 1
   m_Compressed: 0
+  m_UseHighQualityCurve: 1
   m_RotationCurves: []
   m_CompressedRotationCurves: []
   m_PositionCurves:
@@ -16,31 +17,34 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: {x: 0, y: -.100000001, z: 0}
+        value: {x: 0, y: .5, z: 0}
         inSlope: {x: 0, y: -0, z: 0}
         outSlope: {x: 0, y: -0, z: 0}
-        tangentMode: 104351484
-      - time: .0833333358
+        tangentMode: 67
+      - time: .200000003
         value: {x: 0, y: .25, z: 0}
         inSlope: {x: 0, y: 9.12783527, z: 0}
         outSlope: {x: 0, y: 9.12783527, z: 0}
-        tangentMode: -559038737
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: Jugador
   m_ScaleCurves: []
   m_FloatCurves: []
+  m_PPtrCurves: []
   m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  m_MuscleClipInfo:
+  m_AnimationClipSettings:
+    serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: 1
+    m_StopTime: .200000003
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
+    m_LoopTime: 0
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
@@ -59,7 +63,7 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 10
-      - time: .0833333358
+      - time: .200000003
         value: 0
         inSlope: 0
         outSlope: 0
@@ -74,11 +78,11 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: -.100000001
+        value: .5
         inSlope: -0
         outSlope: -0
         tangentMode: 0
-      - time: .0833333358
+      - time: .200000003
         value: .25
         inSlope: 9.12783527
         outSlope: 9.12783527
@@ -97,7 +101,7 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 10
-      - time: .0833333358
+      - time: .200000003
         value: 0
         inSlope: 0
         outSlope: 0
